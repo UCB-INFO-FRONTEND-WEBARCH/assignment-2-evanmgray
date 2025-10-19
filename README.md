@@ -1,5 +1,5 @@
 # Assignment 2: React Task Manager
-## INFO 153A/253A Front-End Web Architecture - Fall 2025
+## INFO 153A/253A Front-End Web Architecture
 
 **Points:** 100 points  
 **Individual Assignment**
@@ -13,6 +13,7 @@ Convert your Assignment 1 Task Manager from HTML/CSS to a fully interactive Reac
 ![Task Manager Design](task-manager-mockup.png)
 
 ---
+
 
 ## Learning Objectives
 
@@ -36,13 +37,13 @@ Create the following React components:
 - `TaskList` - Displays list of tasks
 - `TaskItem` - Individual task display
 - `TaskForm` - Form for adding new tasks
-- `TaskCounter` - Shows task statistics
+- `TaskCounter` - Shows task statistics in header (displays "total / completed" format)
 
 #### 2. Task Management (25 points)
 - **Add Task**: Users can add new tasks via form input
 - **Complete Task**: Click checkbox to mark task as complete/incomplete
 - **Delete Task**: Remove tasks from the list
-- **Task Counter**: Display total tasks and completed count
+- **Task Counter**: Display in the header's upper-right corner using format "total / completed" (e.g., "5/2" means 5 total tasks, 2 completed)
 
 #### 3. React State Management (25 points)
 - Use `useState` to manage the tasks array
@@ -60,10 +61,11 @@ Create the following React components:
 
 Implement task filtering functionality:
 - Display three filter buttons: "All", "Active", and "Completed"
+  - Recommended: Place these horizontally below the "Inbox" heading with "|" separators (e.g., "All | Active | Completed")
 - Filter tasks based on completion status when buttons are clicked
-- Highlight the currently active filter button
-- Update task counter to reflect the filtered view (e.g., "3 of 5 tasks" when showing completed)
+- Highlight the currently active filter button (use red color to match Assignment 1 theme)
 - Default filter should be "All" showing all tasks
+- Note: The header counter always displays "total / completed" regardless of active filter
 
 ---
 
@@ -74,25 +76,38 @@ Implement task filtering functionality:
 // Example component structure
 function App() {
   const [tasks, setTasks] = useState([]);
-  
+
   const addTask = (taskText) => {
     // Add new task to state
   };
-  
+
   const toggleTask = (id) => {
     // Toggle task completion
   };
-  
+
   const deleteTask = (id) => {
     // Remove task from state
   };
-  
+
+  // Calculate counts for TaskCounter
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.completed).length;
+
   return (
     <div className="app">
+      {/* Header with TaskCounter showing "total / completed" */}
+      <header className="main-header">
+        {/* Menu, search box, etc. */}
+        <TaskCounter
+          totalTasks={totalTasks}
+          completedTasks={completedTasks}
+        />
+      </header>
+
+      {/* Main content */}
       <TaskForm onAddTask={addTask} />
-      <TaskCounter tasks={tasks} />
-      <TaskList 
-        tasks={tasks} 
+      <TaskList
+        tasks={tasks}
         onToggle={toggleTask}
         onDelete={deleteTask}
       />
@@ -160,12 +175,16 @@ task-manager-react/
     ├── main.jsx        # Entry point (not index.js!)
     ├── App.jsx         # Main component
     ├── App.css
+    ├── assets/         # Assignment 1 icons (menu, search, etc.)
     └── components/
+        ├── Header.jsx       # Optional: Header bar component
         ├── TaskList.jsx
         ├── TaskItem.jsx
         ├── TaskForm.jsx
-        └── TaskCounter.jsx
+        └── TaskCounter.jsx  # Used in header (shows "total / completed")
 ```
+
+**Note**: Creating a separate `Header` component is optional but recommended for better organization. You can include the header directly in `App.jsx` if you prefer.
 
 ### Step 3: Create Component Files
 ```bash
@@ -303,14 +322,23 @@ Key concepts:
 
 **TaskCounter Component**
 
-This component calculates and displays statistics.
+This component displays task statistics in the **header's upper-right corner**.
+
+**Required Format**: `total / completed`
+- Example: `5/2` means 5 total tasks, 2 completed
+- Example: `10/10` means all tasks completed
+- Example: `3/0` means 3 tasks, none completed yet
+
+**Implementation Details**:
+- Should receive `totalTasks` and `completedTasks` as props
+- Place this component in the header (you may want to create a separate Header component)
+- Display next to the checkmark icon in Assignment 1's red header bar
+- Format: Show the two numbers separated by a forward slash
 
 Think about:
 - How to count total tasks (array length)
 - How to count completed tasks (use `.filter()`)
-- How to calculate active tasks (total - completed)
-
-Display these three numbers in your UI.
+- Where to place this in your component hierarchy (hint: in the header)
 
 ### Filter Buttons
 
@@ -397,7 +425,7 @@ onClick={() => handleDelete(task.id)}
 - Add new task functionality works - **7 points**
 - Mark task as complete/incomplete works - **6 points**
 - Delete task functionality works - **6 points**
-- Task counter updates correctly - **3 points**
+- Task counter displays in header with "total / completed" format and updates correctly - **3 points**
 - Empty state message displays when no tasks - **3 points**
 
 ### React State Management (25 points)
@@ -417,7 +445,7 @@ onClick={() => handleDelete(task.id)}
 - Filter buttons render and respond to clicks - **5 points**
 - Tasks filter correctly based on completion status - **5 points**
 - Active filter button is visually highlighted - **3 points**
-- Task counter updates to reflect filtered view - **2 points**
+- Filter buttons placed horizontally with separators (recommended UI pattern) - **2 points**
 
 ---
 
@@ -499,8 +527,8 @@ const filteredTasks = tasks.filter(task => {
 **Q: Can I add extra features beyond the task filtering?**
 A: Yes, but focus on doing the core requirements and filtering excellently first.
 
-**Q: How should the task counter work with filtering?**
-A: When showing "Active", display count of active tasks. When showing "Completed", display count of completed tasks. When showing "All", display total count.
+**Q: How should the task counter work?**
+A: The TaskCounter component should be placed in the header's upper-right corner (matching Assignment 1's layout). It displays in the format "total / completed" (e.g., "5/2" for 5 total tasks and 2 completed). This counter always shows the same information regardless of which filter is active.
 
 **Q: Do I need to match the exact visual design from Assignment 1?**
 A: Close visual similarity is expected, but small improvements are welcome.
