@@ -1,42 +1,189 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ========== VARIABLES AND FULL DOC STYLES ========== */
+:root {
+  --color-bg: #fff;
+  --color-text: #111;
+  --color-header: #dc4c3e;
+  --color-header-light: #da685e;
+  --color-header-text: #ffffff;
+  --color-left-nav: #fefbf2;
+  --color-left-nav-hover: #f0f0f0;
+  --color-left-nav-count: #7e7d79;
+  --color-inbox-border: #cdcdcd;
+
+  --rounding-radius: 5px;
+
+  --left-nav-width: 300px;
+
+  --main-list-padding: 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.taskManager {
+  color: black;
+  display: grid;
+  grid-template-columns: var(--left-nav-width) 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+h1 {
+  font-size: 20px;
+}
+
+/* ========== HEADER STYLES ========== */
+.site-header {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-header);
+  color: var(--color-header-text);
+  padding: 0.5rem;
+  border-radius: var(--rounding-radius);
+}
+
+.site-header__status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.site-header__count {
+  margin-left: 0.5rem;
+}
+
+.site-header .hamburger-menu-button {
+  background-color: var(--color-header);
+  border: var(--color-header);
+  border-radius: var(--rounding-radius);
+}
+
+.site-header .hamburger-menu-button:hover {
+  cursor: pointer;
+}
+
+.site-header .search-container {
+  background-color: var(--color-header-light);
+  display: flex;
+  border-radius: var(--rounding-radius);
+  width: 255px; /* keeps same length as left nav area*/
+  height: 2rem;
+}
+
+.site-header .search-container .search-icon {
+  background: none;
+  align-self: center;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.site-header .search-container .search-input {
+  color: var(--color-header-text);
+  background: none;
+  border: none;
+  flex: 1;
+}
+
+.site-header .search-input::placeholder {
+  color: #ffffff;
+}
+
+.site-header .search-input:focus {
+  /*I didn't like the default blue focus box when typing*/
+  outline: none;
+  border: 2px solid #ffffff;
+  border-radius: var(--rounding-radius);
+}
+
+/* ========== NAVIGATION STYLES ========== */
+.left-nav {
+  grid-column: 1 / 2;
+  grid-row: 2;
+  background-color: var(--color-left-nav);
+  color: var(--color-text);
+  padding: 1rem;
+  color: #000000;
+}
+
+.left-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.left-nav li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex: 0;
+  padding: 0.5rem;
+  border-radius: var(--rounding-radius);
+}
+
+.left-nav li p {
+  margin: 0rem;
+}
+
+.nav-count {
+  font-size: 12px;
+  color: var(--color-left-nav-count);
+}
+
+.left-nav li:hover {
+  background-color: var(--color-left-nav-hover);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ========== MAIN CONTENT STYLES ========== */
+.main-content {
+  padding: 1rem;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content ul {
+  margin: 0rem;
+  padding: 0;
+  list-style-type: none;
+}
+
+.main-content li {
+  border-bottom: 1px solid var(--color-inbox-border);
+  padding-top: var(--main-list-padding);
+  padding-bottom: var(--main-list-padding);
+}
+
+.main-list-checkbox {
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.main-list-checkbox:checked {
+  background-color: var(--color-header);
+  border-color: var(--color-header);
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 480px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    grid-column: 1 / -1;
   }
-  to {
-    transform: rotate(360deg);
+
+  .left-nav {
+    display: none;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
