@@ -4,6 +4,42 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const testTask = {
+    id: Date.now(), // unique identifier
+    text: "Call Mom", // task description
+    completed: false, // completion status
+  };
+
+  const tasksNew = [...tasks, testTask];
+
+  const taskTest = (e) => {
+    // Target Element
+    const targetElement = e.target;
+
+    // Create Task Element
+    const taskLineItem = document.createElement("li");
+
+    const taskInput = document.createElement("input");
+    taskInput.type = "checkbox";
+    taskInput.id = "1";
+    taskInput.name = "1";
+    taskInput.className = "main-list-checkbox";
+
+    const taskLabel = document.createElement("label");
+    taskLabel.htmlFor = "1";
+    taskLabel.textContent = "Call Mom";
+
+    taskLineItem.appendChild(taskInput);
+    taskLineItem.appendChild(taskLabel);
+
+    taskLineItem.child;
+
+    //Render HTML for each task
+    targetElement.nextSibling.appendChild(taskLineItem);
+  };
+
   return (
     <div className="taskManager">
       <header className="site-header">
@@ -48,54 +84,8 @@ function App() {
         </ul>
       </nav>
       <main className="main-content">
-        <h1>Inbox</h1>
-        <ul>
-          <li>
-            <input
-              type="checkbox"
-              id="1"
-              name="1"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="1">Call Mom</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="2"
-              name="2"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="2">Buy the new issue of Scientific American</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="3"
-              name="3"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="3">Return the textbook to Josie</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="4"
-              name="4"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="4">Buy the new album by Rake</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="5"
-              name="5"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="5">Buy a gift card for Dad</label>
-          </li>
-        </ul>
+        <h1 onClick={taskTest}>Inbox</h1>
+        <ul></ul>
       </main>
     </div>
   );
