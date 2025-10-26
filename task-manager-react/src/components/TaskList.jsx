@@ -1,51 +1,33 @@
+import { useState } from "react";
+import TaskItem from "./TaskItem.jsx";
+
 /*
-       <ul>
-          <li>
-            <input
-              type="checkbox"
-              id="1"
-              name="1"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="1">Call Mom</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="2"
-              name="2"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="2">Buy the new issue of Scientific American</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="3"
-              name="3"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="3">Return the textbook to Josie</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="4"
-              name="4"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="4">Buy the new album by Rake</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="5"
-              name="5"
-              className="main-list-checkbox"
-            />
-            <label htmlFor="5">Buy a gift card for Dad</label>
-          </li>
-        </ul>
+
+What does this component do?
+
+This component, TaskList, is responsible for using TaskItem to render a list of tasks in a task management application.
+It receives an array of task objects as a prop and maps over this array to create a list item for each task.
+Each list item includes a checkbox to mark the task as completed and a label displaying the task's text.
+
 */
+
+function TaskList({ tasks, onToggle, onDelete }) {
+  return (
+    <ul>
+      {/* REACT MAGIC! */}
+      {/* The map function takes an array of JSON objects and returns an array of JSX elements*/}
+      {/* That array is nested inside a pair of curly brackets */}
+      {tasks.map((task) => (
+        <TaskItem
+          //This key is special to React line items and doesn't show in the DOM
+          key={task.id}
+          task={task}
+          onToggle={onToggle}
+          onDelete={onDelete}
+        />
+      ))}
+    </ul>
+  );
+}
 
 export default TaskList;

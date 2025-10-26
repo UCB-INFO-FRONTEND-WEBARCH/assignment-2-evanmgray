@@ -2,6 +2,7 @@
 :root {
   --color-bg: #fff;
   --color-text: #111;
+  --color-text-light: #7e7d79;
   --color-header: #dc4c3e;
   --color-header-light: #da685e;
   --color-header-text: #ffffff;
@@ -54,17 +55,17 @@ h1 {
   margin-left: 0.5rem;
 }
 
-.site-header .hamburger-menu-button {
+.hamburger-menu-button {
   background-color: var(--color-header);
   border: var(--color-header);
   border-radius: var(--rounding-radius);
 }
 
-.site-header .hamburger-menu-button:hover {
+.hamburger-menu-button:hover {
   cursor: pointer;
 }
 
-.site-header .search-container {
+.search-container {
   background-color: var(--color-header-light);
   display: flex;
   border-radius: var(--rounding-radius);
@@ -72,25 +73,25 @@ h1 {
   height: 2rem;
 }
 
-.site-header .search-container .search-icon {
+.search-icon {
   background: none;
   align-self: center;
   margin-left: 0.3rem;
   margin-right: 0.3rem;
 }
 
-.site-header .search-container .search-input {
+.search-input {
   color: var(--color-header-text);
   background: none;
   border: none;
   flex: 1;
 }
 
-.site-header .search-input::placeholder {
+.search-input::placeholder {
   color: #ffffff;
 }
 
-.site-header .search-input:focus {
+.search-input:focus {
   /*I didn't like the default blue focus box when typing*/
   outline: none;
   border: 2px solid #ffffff;
@@ -104,7 +105,6 @@ h1 {
   background-color: var(--color-left-nav);
   color: var(--color-text);
   padding: 1rem;
-  color: #000000;
 }
 
 .left-nav ul {
@@ -113,7 +113,8 @@ h1 {
   margin: 0;
 }
 
-.left-nav li {
+.nav-item,
+.nav-sub-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -121,9 +122,14 @@ h1 {
   flex: 0;
   padding: 0.5rem;
   border-radius: var(--rounding-radius);
+  margin: 0rem;
 }
 
-.left-nav li p {
+.nav-item p {
+  margin: 0rem;
+}
+
+.nav-sub-item p {
   margin: 0rem;
 }
 
@@ -132,9 +138,21 @@ h1 {
   color: var(--color-left-nav-count);
 }
 
-.left-nav li:hover {
+.nav-item:hover {
   background-color: var(--color-left-nav-hover);
   cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-filter:hover {
+  background-color: var(--color-left-nav-hover);
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: var(--rounding-radius);
+}
+
+.nav-filter.active {
+  color: var(--color-header);
   font-weight: bold;
 }
 
@@ -156,6 +174,8 @@ h1 {
   border-bottom: 1px solid var(--color-inbox-border);
   padding-top: var(--main-list-padding);
   padding-bottom: var(--main-list-padding);
+  display: flex;
+  align-items: center;
 }
 
 .main-list-checkbox {
@@ -169,11 +189,77 @@ h1 {
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
+  /* flex 0 0 auto keeps fixed size */
+  flex: 0 0 auto;
+  margin-right: 1rem;
 }
 
 .main-list-checkbox:checked {
   background-color: var(--color-header);
   border-color: var(--color-header);
+}
+
+.main-list-task-label {
+  /*Flex 1 1 means grow and shrink to take space, auto means start with the content size*/
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+.main-list-task-label.complete {
+  color: var(--color-text-light);
+  text-decoration: line-through;
+}
+
+.main-list-delete-button {
+  /* flex 0 0 auto keeps fixed size */
+  flex: 0 0 auto;
+  /* slight buffer between button and text */
+  margin-left: 1rem;
+
+  /*Visual*/
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+}
+
+.main-list-delete-button:hover {
+  background-color: var(--color-left-nav-hover);
+  color: var(--color-header-light);
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: var(--rounding-radius);
+}
+
+.add-task-form {
+  display: flex;
+  align-items: center;
+  padding-top: var(--main-list-padding);
+  padding-bottom: var(--main-list-padding);
+}
+
+.add-task-input {
+  flex: 1 1 auto;
+  background: none;
+  border: none;
+  border-radius: var(--rounding-radius);
+  font: inherit; /* inherit size/weight too */
+  letter-spacing: inherit;
+}
+
+.add-task-input:focus {
+  outline: none;
+}
+
+.add-task-button {
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+}
+
+.add-task-button:hover {
+  background-color: var(--color-left-nav-hover);
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: var(--rounding-radius);
 }
 
 /* ========== RESPONSIVE STYLES ========== */
