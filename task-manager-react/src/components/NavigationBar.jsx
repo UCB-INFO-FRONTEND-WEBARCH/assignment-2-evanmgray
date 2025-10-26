@@ -1,4 +1,7 @@
 import { useState } from "react";
+import inboxIcon from "../assets/inbox_icon.png";
+import calendarIcon from "../assets/calendar_icon.png";
+import upcomingIcon from "../assets/upcoming_icon.png";
 
 /*
 
@@ -13,7 +16,7 @@ function NavigationBar({ activeFilter, onFilterClick }) {
     <nav className="left-nav">
       <ul>
         <li className="nav-item">
-          <img src="../assets/inbox_icon.png" alt="Inbox Icon" />
+          <img src={inboxIcon} alt="Inbox Icon" />
           <p className="nav-item-text">Inbox</p>
           <p className="nav-count">5</p>
         </li>
@@ -44,12 +47,12 @@ function NavigationBar({ activeFilter, onFilterClick }) {
           </p>
         </li>
         <li className="nav-item">
-          <img src="../assets/calendar_icon.png" alt="Inbox Icon" />
+          <img src={calendarIcon} alt="Inbox Icon" />
           <p className="nav-item-text">Today</p>
           <p className="nav-count">5</p>
         </li>
         <li className="nav-item">
-          <img src="../assets/upcoming_icon.png" alt="Upcoming Icon" />
+          <img src={upcomingIcon} alt="Upcoming Icon" />
           <p className="nav-item-text">Upcoming</p>
         </li>
       </ul>
