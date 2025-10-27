@@ -11,19 +11,15 @@ It renders the navigation bar for the task management application.
 
 */
 
-function HeaderBar({ totalTasks, completedTasks }) {
+function HeaderBar({ totalTasks, completedTasks, onMenuClick }) {
   return (
     <header className="site-header">
       <button className="hamburger-menu-button">
-        <img src={menuIcon} alt="Menu Icon" />
+        <img src={menuIcon} alt="Menu Icon" onClick={onMenuClick} />
       </button>
-      <form>
+      <form className="search-form">
         <label className="search-container">
-          <img
-            className="search-icon"
-            src={searchIcon}
-            alt="Search Icon"
-          />
+          <img className="search-icon" src={searchIcon} alt="Search Icon" />
           <input
             className="search-input"
             type="search"

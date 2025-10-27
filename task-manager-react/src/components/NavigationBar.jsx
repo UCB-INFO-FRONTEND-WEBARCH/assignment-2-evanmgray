@@ -11,14 +11,19 @@ It renders the navigation bar for the task management application.
 
 */
 
-function NavigationBar({ activeFilter, onFilterClick }) {
+function NavigationBar({
+  activeFilter,
+  onFilterClick,
+  showMobileMenu,
+  totalTasks,
+}) {
   return (
-    <nav className="left-nav">
+    <nav className={`left-nav ${showMobileMenu ? "is-open" : ""}`}>
       <ul>
         <li className="nav-item">
           <img src={inboxIcon} alt="Inbox Icon" />
           <p className="nav-item-text">Inbox</p>
-          <p className="nav-count">5</p>
+          <p className="nav-count">{totalTasks}</p>
         </li>
         <li className="nav-sub-item">
           <p
@@ -49,7 +54,7 @@ function NavigationBar({ activeFilter, onFilterClick }) {
         <li className="nav-item">
           <img src={calendarIcon} alt="Inbox Icon" />
           <p className="nav-item-text">Today</p>
-          <p className="nav-count">5</p>
+          <p className="nav-count">{totalTasks}</p>
         </li>
         <li className="nav-item">
           <img src={upcomingIcon} alt="Upcoming Icon" />

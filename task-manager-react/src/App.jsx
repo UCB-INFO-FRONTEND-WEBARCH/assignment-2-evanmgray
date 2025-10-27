@@ -17,6 +17,8 @@ function App() {
 
   const [activeFilter, setActiveFilter] = useState("all");
 
+  const [navMenuState, setNavMenuState] = useState(true);
+
   /////////////////// State Manipulation Functions ///////////////////
   const addTask = (taskText) => {
     // Add new task to state
@@ -50,6 +52,10 @@ function App() {
     setActiveFilter(filter);
   };
 
+  const toggleNavMenu = () => {
+    setNavMenuState(!navMenuState);
+  };
+
   // Calculate counts for TaskCounter
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed).length;
@@ -66,22 +72,30 @@ function App() {
   //Return main block of application
   return (
     <div className="taskManager">
-      <HeaderBar totalTasks={totalTasks} completedTasks={completedTasks} />
-      <NavigationBar
-        activeFilter={activeFilter}
-        onFilterClick={changeActiveFilter}
+      <HeaderBar
+        totalTasks={totalTasks}
+        completedTasks={completedTasks}
+        onMenuClick={toggleNavMenu}
       />
-      <main className="main-content">
-        {tasks.length === 0 ? (
-          <p>No tasks yet!</p>
-        ) : (
-          <TaskList
-            tasks={filteredTasks}
-            onToggle={toggleTask}
-            onDelete={deleteTask}
-          />
-        )}
-        <TaskForm addTask={addTask} />
+      <main className="main-flex-area">
+        <NavigationBar
+          activeFilter={activeFilter}
+          onFilterClick={changeActiveFilter}
+          showMobileMenu={navMenuState}
+          totalTasks={totalTasks}
+        />
+        <section className="task-list">
+          {tasks.length === 0 ? (
+            <p>No tasks yet!</p>
+          ) : (
+            <TaskList
+              tasks={filteredTasks}
+              onToggle={toggleTask}
+              onDelete={deleteTask}
+            />
+          )}
+          <TaskForm addTask={addTask} />
+        </section>
       </main>
     </div>
   );

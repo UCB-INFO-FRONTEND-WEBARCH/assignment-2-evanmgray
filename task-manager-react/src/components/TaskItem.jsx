@@ -16,18 +16,18 @@ function TaskItem({ task, onToggle, onDelete }) {
         type="checkbox"
         id={task.id}
         name={task.id}
-        className="main-list-checkbox"
+        className="task-list-checkbox"
         checked={task.completed}
         onChange={() => onToggle(task.id)}
       />
       <label
-        className={`main-list-task-label ${task.completed ? "complete" : ""}`}
+        className={`task-list-task-label ${task.completed ? "complete" : ""}`}
         htmlFor={task.id}
       >
         {task.text}
       </label>
       <button
-        className="main-list-delete-button"
+        className="task-list-delete-button"
         onClick={() => onDelete(task.id)}
       >
         Delete
